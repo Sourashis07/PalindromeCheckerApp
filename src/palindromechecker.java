@@ -18,7 +18,7 @@
  *
  * The goal is to establish a clear startup flow.
  *
- * @author Oreoz
+ * @author Sourashis
  * @version 1.0
  */
 
