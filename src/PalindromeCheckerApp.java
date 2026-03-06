@@ -1,6 +1,5 @@
 import java.util.LinkedList;
-import java.util.Stack;
-import java.util.Queue;
+import java.util.Deque;
 
 /**
  * ============================================================
@@ -22,40 +21,36 @@ import java.util.Queue;
  *
  * The goal is to establish a clear startup flow.
  *
- * @author Sourashis
- * @version 6.0
+ * @author Oreoz
+ * @version 7.0
  */
 
 public class PalindromeCheckerApp {
+
+    public static boolean isPalindrome(String input) {
+
+        Deque<Character> deque = new LinkedList<>();
+        for (char ch : input.toCharArray()) {
+            deque.addLast(ch);
+        }
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
 
         System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("version:6.0");
+        System.out.println("version:7.0");
         System.out.println("System instanced successful");
         System.out.println();
 
-        String Palindrome = "racecar", ReversedQ = "", ReversedS = "";
-        char[] chars = Palindrome.toCharArray();
-        Stack <Character> stack  = new Stack<>();
-        Queue <Character> queue = new LinkedList<>();
+        String Palindrome = "racecar";
 
-        int i = 0, n = chars.length;
-
-        for(char ch : chars){
-            stack.push(ch);
-            queue.add(ch);
-        }
-
-        while (!queue.isEmpty() && !stack.empty()) {
-            ReversedQ += queue.remove();
-            ReversedS += stack.pop();
-        }
-
-        if (Palindrome.equals(ReversedS))
-            System.out.println("The Stack method worked.");
-        if (Palindrome.equals(ReversedQ))
-            System.out.println("The Queue method worked");
-        else
-            System.out.println("None of the methods worked");
+        if(isPalindrome(Palindrome))    System.out.println("The string is palindrome");
+        else System.out.println("The string is not palindrome");
     }
 }
