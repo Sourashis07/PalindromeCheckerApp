@@ -19,7 +19,7 @@
  * The goal is to establish a clear startup flow.
  *
  * @author Sourashis
- * @version 1.0
+ * @version 2.0
  */
 
 public class palindromechecker{
