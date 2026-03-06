@@ -21,7 +21,7 @@ import java.util.Deque;
  *
  * The goal is to establish a clear startup flow.
  *
- * @author Oreoz
+ * @author Sourashis
  * @version 7.0
  */
 
