@@ -18,8 +18,8 @@
  *
  * The goal is to establish a clear startup flow.
  *
- * @author Oreoz
- * @version 1.0
+ * @author Sourashis
+ * @version 3.0
  */
 
 public class PalindromeCheckerApp {
