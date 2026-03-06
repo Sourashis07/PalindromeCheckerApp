@@ -26,19 +26,26 @@ public class PalindromeCheckerApp {
     public static void main(String[] args) {
 
         System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("version:3.0");
+        System.out.println("version:4.0");
         System.out.println("System instanced successful");
         System.out.println();
 
         String Palindrome = "racecar";
-        String Reverse = "";
+        char[] chars = Palindrome.toCharArray();
 
-        int i;
+        boolean flag = true;
+        int start = 0, end = Palindrome.length()-1;
 
-        for(i = Palindrome.length()-1; i >= 0; i--){
-            Reverse += Palindrome.charAt(i);
+        while (start < end){
+            if(chars[start] != chars[end]){
+                flag = false;
+                break;
+            }
+            start ++;
+            end --;
         }
-        if (Palindrome.equals(Reverse))  System.out.println("The string " + Palindrome + " is a palindrome.");
+
+        if (flag)  System.out.println("The string " + Palindrome + " is a palindrome.");
         else System.out.println("The string " + Palindrome + " is not a palindrome.");
     }
 }
