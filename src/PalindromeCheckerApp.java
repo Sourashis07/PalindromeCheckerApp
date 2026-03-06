@@ -1,4 +1,6 @@
-import java.lang.classfile.instruction.ReturnInstruction;
+import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * ============================================================
@@ -21,44 +23,85 @@ import java.lang.classfile.instruction.ReturnInstruction;
  * The goal is to establish a clear startup flow.
  *
  * @author Oreoz
- * @version 10.0
+ * @version 12.0
  */
 
-public class PalindromeCheckerApp {
+interface PalindromeStrategy {
+    boolean checkPalindrome(String input);
+}
 
-    public static boolean isPalindrome(String input, int i) {
-        if(i >= input.length() / 2)
-            return true;
-        else if (input.charAt(i) != input.charAt(input.length()-i-1))
-            return  false;
-        else
-            return isPalindrome(input, i + 1);
-    }
 
-    public static String preprocessing (String input) {
-        String s = "";
-        for (char c : input.toCharArray()){
-            if (c == ' ') continue;
-            else s += c;
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean checkPalindrome(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
-        return s.toLowerCase();
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
     }
+}
+
+
+class DequeStrategy implements PalindromeStrategy {
+
+    public boolean checkPalindrome(String input) {
+
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
+        }
+
+        while (deque.size() > 1) {
+
+            char front = deque.removeFirst();
+            char back = deque.removeLast();
+
+            if (front != back) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+
+public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("version:8.0");
+        System.out.println("version:12.0");
         System.out.println("System instanced successful");
+
+        String word1 = "racecar";
+        String word2 = "hello";
+
+        PalindromeStrategy strategy;
+
+        strategy = new StackStrategy();
+
+        System.out.println("Using Stack Strategy:");
+        System.out.println(word1 + " -> " + strategy.checkPalindrome(word1));
+        System.out.println(word2 + " -> " + strategy.checkPalindrome(word2));
+
         System.out.println();
 
-        String Palindrome = "race car";
+        strategy = new DequeStrategy();
 
-        if(isPalindrome(Palindrome, 0))    System.out.println("The string " + Palindrome + " is palindrome");
-        else System.out.println("The string is " + Palindrome + " not palindrome");
-
-        Palindrome = "f1 racecar";
-
-        if(isPalindrome(Palindrome, 0))    System.out.println("The string " + Palindrome + "  is palindrome");
-        else System.out.println("The string " + Palindrome + " is not palindrome");
+        System.out.println("Using Deque Strategy:");
+        System.out.println(word1 + " -> " + strategy.checkPalindrome(word1));
+        System.out.println(word2 + " -> " + strategy.checkPalindrome(word2));
     }
 }
